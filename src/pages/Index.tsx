@@ -17,6 +17,12 @@ import sorghum from "@/assets/products/sorghum.jpg";
 import cassava from "@/assets/products/cassava.jpg";
 import palmOil from "@/assets/products/palm-oil.jpg";
 import bagasse from "@/assets/products/bagasse-containers.jpg";
+import cookingOil from "@/assets/products/cooking-oil.jpg";
+import biscuits from "@/assets/products/biscuits.jpg";
+import pens from "@/assets/products/pens.jpg";
+import notebooks from "@/assets/products/notebooks.jpg";
+import registers from "@/assets/products/registers.jpg";
+import faceOil from "@/assets/products/face-oil.jpg";
 
 const staticProducts = [
   { id: "s-coffee", handle: "coffee", title: "Premium Rwandan Arabica Coffee Beans (Single Origin)", vendor: "Kigali Coffee Co.", image: coffee, price: 9.50, unit: "250g", badge: "Hot", category: "Coffee" },
