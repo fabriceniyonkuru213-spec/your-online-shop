@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
-import { RfqDrawer } from "./RfqDrawer";
-import { Search, User, Globe, MessageSquare, Menu } from "lucide-react";
+import { useRfqStore } from "@/stores/rfqStore";
+import { Search, User, Globe, MessageSquare, Menu, ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export const Header = () => {
   const [search, setSearch] = useState("");
-
+  const rfqCount = useRfqStore((s) => s.items.length);
   return (
     <header className="sticky top-0 z-40 w-full bg-background border-b border-border shadow-sm">
       {/* Top utility bar */}
@@ -77,7 +78,17 @@ export const Header = () => {
         </form>
 
         <div className="flex items-center gap-1 shrink-0">
-          <RfqDrawer />
+          <Button asChild variant="ghost" size="sm" className="relative h-10 px-2 gap-1.5 text-xs font-semibold">
+            <Link to="/my-list">
+              <ListChecks className="h-5 w-5" />
+              <span className="hidden md:inline">My List</span>
+              {rfqCount > 0 && (
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-[10px] bg-primary">
+                  {rfqCount}
+                </Badge>
+              )}
+            </Link>
+          </Button>
           <CartDrawer />
           <Button variant="ghost" size="icon" className="hidden md:inline-flex">
             <MessageSquare className="h-5 w-5" />
@@ -101,7 +112,7 @@ export const Header = () => {
           <a href="#packaging" className="hover:text-primary whitespace-nowrap">Food Packaging</a>
           <a href="#oils" className="hover:text-primary whitespace-nowrap">Oils & Honey</a>
           <a href="#suppliers" className="hover:text-primary whitespace-nowrap">Verified Suppliers</a>
-          <a href="#rfq" className="hover:text-primary whitespace-nowrap">Request Quote</a>
+          <Link to="/my-list" className="hover:text-primary whitespace-nowrap">My List / RFQ</Link>
           <a href="#shipping" className="hover:text-primary whitespace-nowrap">Logistics</a>
         </div>
       </nav>
