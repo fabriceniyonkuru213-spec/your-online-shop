@@ -99,7 +99,7 @@ export const ProductCard = ({ product }: Props) => {
               <Star key={i} className="h-3 w-3 fill-current" />
             ))}
           </span>
-          <span>· {p.vendor ? "Trader" : "Supplier"}</span>
+          <span>· Verified Trader</span>
         </div>
 
         <div className="text-[11px] text-muted-foreground flex items-center gap-1">
