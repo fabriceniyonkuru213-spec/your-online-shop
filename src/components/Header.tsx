@@ -112,7 +112,7 @@ export const Header = () => {
           <a href="#packaging" className="hover:text-primary whitespace-nowrap">Food Packaging</a>
           <a href="#oils" className="hover:text-primary whitespace-nowrap">Oils & Honey</a>
           <a href="#suppliers" className="hover:text-primary whitespace-nowrap">Verified Suppliers</a>
-          <a href="#rfq" className="hover:text-primary whitespace-nowrap">Request Quote</a>
+          <Link to="/my-list" className="hover:text-primary whitespace-nowrap">My List / RFQ</Link>
           <a href="#shipping" className="hover:text-primary whitespace-nowrap">Logistics</a>
         </div>
       </nav>
