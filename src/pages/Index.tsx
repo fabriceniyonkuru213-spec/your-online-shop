@@ -36,6 +36,17 @@ const staticProducts = [
   { id: "s-cassava", handle: "cassava-flour", title: "Cassava Flour (Ifu y'Imyumbati) — Fine Grade", vendor: "Southern Mills", image: cassava, price: 14.00, unit: "10kg", category: "Flour" },
   { id: "s-palm", handle: "palm-oil", title: "Pure Red Palm Oil — Cold-Pressed", vendor: "Akagera Oils", image: palmOil, price: 7.20, unit: "750ml", category: "Oils" },
   { id: "s-bagasse", handle: "bagasse-containers", title: "Biodegradable Bagasse Food Containers", vendor: "EcoPack RW", image: bagasse, price: 0.30, unit: "pc", badge: "Eco", category: "Packaging" },
+  // Cooking oil — multiple sizes
+  { id: "s-oil-20l", handle: "cooking-oil-20l", title: "Pure Sunflower Cooking Oil — 20L Jerrycan", vendor: "Akagera Oils", image: cookingOil, price: 48.00, unit: "20L", badge: "Bulk", category: "Oils" },
+  { id: "s-oil-10l", handle: "cooking-oil-10l", title: "Pure Sunflower Cooking Oil — 10L Jerrycan", vendor: "Akagera Oils", image: cookingOil, price: 26.00, unit: "10L", category: "Oils" },
+  { id: "s-oil-5l", handle: "cooking-oil-5l", title: "Pure Sunflower Cooking Oil — 5L Bottle", vendor: "Akagera Oils", image: cookingOil, price: 14.50, unit: "5L", category: "Oils" },
+  { id: "s-oil-1l", handle: "cooking-oil-1l", title: "Pure Sunflower Cooking Oil — 1L Bottle", vendor: "Akagera Oils", image: cookingOil, price: 3.20, unit: "1L", category: "Oils" },
+  // Stationery & snacks packages
+  { id: "s-biscuits", handle: "biscuits-carton", title: "Assorted Biscuits — Wholesale Carton (48 packs)", vendor: "Kigali Foods Ltd", image: biscuits, price: 22.00, unit: "carton", badge: "Wholesale", category: "Snacks" },
+  { id: "s-pens", handle: "pens-box", title: "Blue Ballpoint Pens — Box of 50", vendor: "Office Supplies RW", image: pens, price: 6.50, unit: "box/50", category: "Stationery" },
+  { id: "s-notebooks", handle: "notebooks-pack", title: "School Exercise Notebooks — Pack of 20", vendor: "Office Supplies RW", image: notebooks, price: 12.00, unit: "pack/20", category: "Stationery" },
+  { id: "s-registers", handle: "registers-pack", title: "Hardcover Office Registers — Pack of 6", vendor: "Office Supplies RW", image: registers, price: 18.00, unit: "pack/6", category: "Stationery" },
+  { id: "s-face-oil", handle: "face-oil-pack", title: "Natural Face Oil with Dropper — Wholesale Pack of 12", vendor: "Rwanda Naturals", image: faceOil, price: 36.00, unit: "pack/12", badge: "New", category: "Cosmetics" },
 ];
 
 const Index = () => {
