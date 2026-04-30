@@ -347,16 +347,28 @@ const MyList = () => {
                     <span className="font-medium">${subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs">
+                    <span className="text-muted-foreground">In Rwandan Francs</span>
+                    <span className="font-semibold text-brand-green">FRW {frw(subtotal)}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
                     <span className="text-muted-foreground">Shipping</span>
                     <span className="text-muted-foreground italic">Quoted by supplier</span>
                   </div>
                   <div className="border-t border-border pt-2 flex justify-between items-baseline">
                     <span className="font-semibold">Estimated total</span>
-                    <span className="text-2xl font-bold text-primary">
-                      ${subtotal.toFixed(2)}
-                    </span>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-primary leading-tight">
+                        ${subtotal.toFixed(2)}
+                      </div>
+                      <div className="text-xs font-semibold text-brand-green">
+                        ≈ FRW {frw(subtotal)}
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <p className="text-[10px] text-muted-foreground -mt-1">
+                  Indicative rate: 1 USD ≈ {USD_TO_FRW.toLocaleString()} FRW
+                </p>
 
                 <div className="space-y-2">
                   <Button
