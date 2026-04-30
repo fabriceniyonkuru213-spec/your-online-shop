@@ -95,10 +95,21 @@
   }
 }
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  section[id] {
+    scroll-margin-top: 140px;
+  }
+}
+
 @layer utilities {
   .container-wide {
     @apply max-w-[1400px] mx-auto px-4 lg:px-6;
   }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   .bg-brand-gradient {
     background: var(--gradient-hero);
   }
