@@ -122,7 +122,9 @@ const MyList = () => {
                 <div className="text-xl font-bold text-primary">
                   ${subtotal.toFixed(2)}
                 </div>
-                <div className="text-[11px] text-white/70 uppercase">Est. total</div>
+                <div className="text-[11px] text-white/70 uppercase">
+                  Est. total · <span className="text-brand-yellow">FRW {frw(subtotal)}</span>
+                </div>
               </div>
             </div>
           </div>
