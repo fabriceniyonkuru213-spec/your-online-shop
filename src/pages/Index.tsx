@@ -29,6 +29,14 @@ import desktopComputer from "@/assets/products/desktop-computer.jpg";
 import deskPhone from "@/assets/products/desk-phone.jpg";
 import tablet from "@/assets/products/tablet.jpg";
 import earbuds from "@/assets/products/earbuds.jpg";
+import gamingLaptop from "@/assets/products/gaming-laptop.jpg";
+import ultrabook from "@/assets/products/ultrabook.jpg";
+import aioPc from "@/assets/products/aio-pc.jpg";
+import gamingPc from "@/assets/products/gaming-pc.jpg";
+import miniPc from "@/assets/products/mini-pc.jpg";
+import convertibleLaptop from "@/assets/products/convertible-laptop.jpg";
+import chromebook from "@/assets/products/chromebook.jpg";
+import server from "@/assets/products/server.jpg";
 
 const staticProducts = [
   { id: "s-coffee", handle: "coffee", title: "Premium Rwandan Arabica Coffee Beans (Single Origin)", vendor: "Kigali Coffee Co.", image: coffee, price: 9.50, unit: "250g", badge: "Hot", category: "Coffee" },
@@ -60,6 +68,15 @@ const staticProducts = [
   { id: "s-deskphone", handle: "desk-phone", title: "Office Desk Telephone — Corded Landline with Caller ID", vendor: "Office Supplies RW", image: deskPhone, price: 28.00, unit: "unit", category: "Electronics" },
   { id: "s-tablet", handle: "tablet-10", title: "Android Tablet 10\" — 64GB, Wi-Fi + LTE", vendor: "Kigali Electronics", image: tablet, price: 180.00, unit: "unit", category: "Electronics" },
   { id: "s-earbuds", handle: "earbuds-tws", title: "Wireless Bluetooth Earbuds with Charging Case", vendor: "Kigali Electronics", image: earbuds, price: 18.00, unit: "pair", badge: "Wholesale", category: "Electronics" },
+  // Different types of computers
+  { id: "s-gaming-laptop", handle: "gaming-laptop", title: "Gaming Laptop 15.6\" — RTX GPU, 16GB RAM, 1TB SSD, RGB Keyboard", vendor: "Kigali Electronics", image: gamingLaptop, price: 1250.00, unit: "unit", badge: "New", category: "Computers" },
+  { id: "s-ultrabook", handle: "ultrabook", title: "Ultrabook 14\" — Intel i7, 16GB RAM, 512GB SSD, Lightweight", vendor: "Kigali Electronics", image: ultrabook, price: 890.00, unit: "unit", category: "Computers" },
+  { id: "s-aio-pc", handle: "all-in-one-pc", title: "All-in-One Desktop PC 24\" — Intel i5, 8GB RAM, 256GB SSD", vendor: "Kigali Electronics", image: aioPc, price: 720.00, unit: "unit", category: "Computers" },
+  { id: "s-gaming-pc", handle: "gaming-pc", title: "Gaming Desktop Tower — RTX 4060, 32GB RAM, 1TB NVMe, RGB", vendor: "Kigali Electronics", image: gamingPc, price: 1480.00, unit: "unit", badge: "Hot", category: "Computers" },
+  { id: "s-mini-pc", handle: "mini-pc", title: "Mini PC — Intel N100, 8GB RAM, 256GB SSD, Office Ready", vendor: "Kigali Electronics", image: miniPc, price: 240.00, unit: "unit", category: "Computers" },
+  { id: "s-convertible", handle: "convertible-2in1", title: "2-in-1 Convertible Laptop 13\" — Touchscreen, 8GB RAM, 256GB", vendor: "Kigali Electronics", image: convertibleLaptop, price: 680.00, unit: "unit", category: "Computers" },
+  { id: "s-chromebook", handle: "chromebook", title: "Chromebook 11.6\" — Student Laptop, 4GB RAM, 64GB eMMC", vendor: "Kigali Electronics", image: chromebook, price: 220.00, unit: "unit", badge: "Wholesale", category: "Computers" },
+  { id: "s-server", handle: "rack-server", title: "Rack Mount Server 1U — Xeon CPU, 32GB ECC RAM, 2TB Storage", vendor: "Kigali Electronics", image: server, price: 2150.00, unit: "unit", category: "Computers" },
 ];
 
 const Index = () => {
