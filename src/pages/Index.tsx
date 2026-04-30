@@ -273,6 +273,114 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Category sections — wired to nav anchors */}
+      {[
+        { id: "grains", title: "Grains & Beans", desc: "Maize, sorghum, beans and cassava — sourced from Rwandan cooperatives.", cats: ["Grains", "Flour"] },
+        { id: "coffee", title: "Coffee & Tea", desc: "Single-origin Arabica and highland black tea, ready to export.", cats: ["Coffee", "Tea"] },
+        { id: "produce", title: "Fresh Produce", desc: "Bananas, vegetables and seasonal fruit from Eastern Province farms.", cats: ["Produce"] },
+        { id: "packaging", title: "Food Packaging", desc: "Eco kraft boxes, vacuum bags and biodegradable bagasse containers.", cats: ["Packaging"] },
+        { id: "oils", title: "Oils & Honey", desc: "Pure cooking oils, palm oil and highland honey at wholesale prices.", cats: ["Oils", "Honey"] },
+      ].map((sec) => {
+        const items = staticProducts.filter((p) => sec.cats.includes(p.category));
+        if (items.length === 0) return null;
+        return (
+          <section key={sec.id} id={sec.id} className="py-10 border-t border-border">
+            <div className="container-wide">
+              <div className="flex items-end justify-between mb-5">
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Category</p>
+                  <h2 className="text-2xl md:text-3xl font-bold">{sec.title}</h2>
+                  <p className="text-sm text-muted-foreground mt-1 max-w-2xl">{sec.desc}</p>
+                </div>
+                <a href="#shop" className="text-sm text-primary font-semibold hover:underline hidden md:inline">View all →</a>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
+                {items.map((p) => (
+                  <StaticProductCard key={p.id} p={p} />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* Verified Suppliers */}
+      <section id="suppliers" className="py-12 bg-secondary/40 border-t border-border">
+        <div className="container-wide">
+          <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Trusted partners</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">Verified Suppliers</h2>
+          <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
+            Every supplier on KigaliTrade is verified for business registration, quality and export readiness.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { name: "Kigali Coffee Co.", region: "Kigali · Coffee", years: 12, rating: 4.9 },
+              { name: "Nyanza Tea Estates", region: "Southern Province · Tea", years: 18, rating: 4.8 },
+              { name: "Rwanda Grain Ltd", region: "Musanze · Grains", years: 9, rating: 4.7 },
+              { name: "Akagera Apiaries", region: "Eastern Province · Honey", years: 7, rating: 4.9 },
+              { name: "PackRwanda", region: "Kigali · Packaging", years: 6, rating: 4.6 },
+              { name: "Kigali Electronics", region: "Kigali · Electronics", years: 5, rating: 4.7 },
+            ].map((s) => (
+              <div key={s.name} className="bg-card border border-border rounded-md p-4 hover:shadow-card-hover transition-shadow">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="h-10 w-10 rounded-md bg-brand-gradient flex items-center justify-center text-white font-bold">
+                    {s.name[0]}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold leading-tight">{s.name}</h3>
+                    <p className="text-xs text-muted-foreground">{s.region}</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1"><ShieldCheck className="h-3.5 w-3.5 text-brand-green" /> Verified · {s.years} yrs</span>
+                  <span className="font-semibold text-foreground">★ {s.rating}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Logistics */}
+      <section id="shipping" className="py-12 border-t border-border">
+        <div className="container-wide grid lg:grid-cols-2 gap-8 items-start">
+          <div>
+            <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Logistics</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">Shipping across Rwanda & EAC</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              We partner with trusted logistics providers to deliver your bulk orders safely — from Kigali warehouses to your door, anywhere in East Africa and beyond.
+            </p>
+            <ul className="space-y-2 text-sm">
+              {[
+                "Door-to-door delivery within Kigali in 24h",
+                "EAC ground freight to Uganda, Kenya, Tanzania, Burundi, DRC",
+                "Air & sea freight via DHL and Bolloré for export orders",
+                "Real-time tracking and insurance available on all shipments",
+              ].map((t) => (
+                <li key={t} className="flex gap-2">
+                  <Truck className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              { title: "Kigali Local", time: "24h", price: "From $5" },
+              { title: "EAC Ground", time: "3–7 days", price: "From $40" },
+              { title: "Air Freight", time: "2–5 days", price: "Quote on request" },
+              { title: "Sea Freight", time: "20–35 days", price: "Bulk orders" },
+            ].map((s) => (
+              <div key={s.title} className="bg-card border border-border rounded-md p-4">
+                <h3 className="font-semibold mb-1">{s.title}</h3>
+                <p className="text-xs text-muted-foreground">Transit: {s.time}</p>
+                <p className="text-sm font-semibold text-primary mt-2">{s.price}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-brand-dark text-white">
         <div className="container-wide py-12 grid md:grid-cols-4 gap-8 text-sm">
