@@ -23,6 +23,12 @@ import pens from "@/assets/products/pens.jpg";
 import notebooks from "@/assets/products/notebooks.jpg";
 import registers from "@/assets/products/registers.jpg";
 import faceOil from "@/assets/products/face-oil.jpg";
+import laptop from "@/assets/products/laptop.jpg";
+import smartphone from "@/assets/products/smartphone.jpg";
+import desktopComputer from "@/assets/products/desktop-computer.jpg";
+import deskPhone from "@/assets/products/desk-phone.jpg";
+import tablet from "@/assets/products/tablet.jpg";
+import earbuds from "@/assets/products/earbuds.jpg";
 
 const staticProducts = [
   { id: "s-coffee", handle: "coffee", title: "Premium Rwandan Arabica Coffee Beans (Single Origin)", vendor: "Kigali Coffee Co.", image: coffee, price: 9.50, unit: "250g", badge: "Hot", category: "Coffee" },
@@ -47,6 +53,13 @@ const staticProducts = [
   { id: "s-notebooks", handle: "notebooks-pack", title: "School Exercise Notebooks — Pack of 20", vendor: "Office Supplies RW", image: notebooks, price: 12.00, unit: "pack/20", category: "Stationery" },
   { id: "s-registers", handle: "registers-pack", title: "Hardcover Office Registers — Pack of 6", vendor: "Office Supplies RW", image: registers, price: 18.00, unit: "pack/6", category: "Stationery" },
   { id: "s-face-oil", handle: "face-oil-pack", title: "Natural Face Oil with Dropper — Wholesale Pack of 12", vendor: "Rwanda Naturals", image: faceOil, price: 36.00, unit: "pack/12", badge: "New", category: "Cosmetics" },
+  // Electronics
+  { id: "s-laptop", handle: "laptop-15", title: "Business Laptop 15.6\" — Intel i5, 8GB RAM, 512GB SSD", vendor: "Kigali Electronics", image: laptop, price: 620.00, unit: "unit", badge: "New", category: "Electronics" },
+  { id: "s-desktop", handle: "desktop-pc", title: "Desktop Computer Set — Monitor, Keyboard & Mouse", vendor: "Kigali Electronics", image: desktopComputer, price: 540.00, unit: "set", category: "Electronics" },
+  { id: "s-smartphone", handle: "smartphone-128", title: "Android Smartphone — 6.5\" Display, 128GB Storage", vendor: "Kigali Electronics", image: smartphone, price: 220.00, unit: "unit", badge: "Hot", category: "Electronics" },
+  { id: "s-deskphone", handle: "desk-phone", title: "Office Desk Telephone — Corded Landline with Caller ID", vendor: "Office Supplies RW", image: deskPhone, price: 28.00, unit: "unit", category: "Electronics" },
+  { id: "s-tablet", handle: "tablet-10", title: "Android Tablet 10\" — 64GB, Wi-Fi + LTE", vendor: "Kigali Electronics", image: tablet, price: 180.00, unit: "unit", category: "Electronics" },
+  { id: "s-earbuds", handle: "earbuds-tws", title: "Wireless Bluetooth Earbuds with Charging Case", vendor: "Kigali Electronics", image: earbuds, price: 18.00, unit: "pair", badge: "Wholesale", category: "Electronics" },
 ];
 
 const Index = () => {
