@@ -45,6 +45,13 @@ const MyList = () => {
   );
   const totalUnits = items.reduce((s, i) => s + i.quantity, 0);
 
+  // USD → FRW conversion (indicative rate)
+  const USD_TO_FRW = 1350;
+  const frw = (usd: number) =>
+    new Intl.NumberFormat("en-RW", { maximumFractionDigits: 0 }).format(
+      Math.round(usd * USD_TO_FRW)
+    );
+
   const handleSubmitRfq = (e: React.FormEvent) => {
     e.preventDefault();
     if (!buyerName || !buyerEmail) {
