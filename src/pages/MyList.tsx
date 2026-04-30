@@ -209,7 +209,11 @@ const MyList = () => {
                               Verified Supplier
                             </Badge>
                             <span className="text-[11px] text-muted-foreground">
-                              ${parseFloat(item.price.amount).toFixed(2)} / unit
+                              ${parseFloat(item.price.amount).toFixed(2)}{" "}
+                              <span className="text-foreground/70">
+                                · FRW {frw(parseFloat(item.price.amount))}
+                              </span>{" "}
+                              / unit
                             </span>
                           </div>
                           <div className="mt-auto pt-2 flex items-center gap-2">
