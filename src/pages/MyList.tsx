@@ -269,6 +269,9 @@ const MyList = () => {
                             <div className="text-lg font-bold text-primary">
                               ${lineTotal.toFixed(2)}
                             </div>
+                            <div className="text-[11px] font-semibold text-brand-green">
+                              FRW {frw(lineTotal)}
+                            </div>
                             <div className="text-[11px] text-muted-foreground">
                               {item.quantity} × ${parseFloat(item.price.amount).toFixed(2)}
                             </div>
