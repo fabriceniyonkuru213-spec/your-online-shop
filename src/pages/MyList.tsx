@@ -45,6 +45,13 @@ const MyList = () => {
   );
   const totalUnits = items.reduce((s, i) => s + i.quantity, 0);
 
+  // USD → FRW conversion (indicative rate)
+  const USD_TO_FRW = 1350;
+  const frw = (usd: number) =>
+    new Intl.NumberFormat("en-RW", { maximumFractionDigits: 0 }).format(
+      Math.round(usd * USD_TO_FRW)
+    );
+
   const handleSubmitRfq = (e: React.FormEvent) => {
     e.preventDefault();
     if (!buyerName || !buyerEmail) {
@@ -115,7 +122,9 @@ const MyList = () => {
                 <div className="text-xl font-bold text-primary">
                   ${subtotal.toFixed(2)}
                 </div>
-                <div className="text-[11px] text-white/70 uppercase">Est. total</div>
+                <div className="text-[11px] text-white/70 uppercase">
+                  Est. total · <span className="text-brand-yellow">FRW {frw(subtotal)}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -200,7 +209,11 @@ const MyList = () => {
                               Verified Supplier
                             </Badge>
                             <span className="text-[11px] text-muted-foreground">
-                              ${parseFloat(item.price.amount).toFixed(2)} / unit
+                              ${parseFloat(item.price.amount).toFixed(2)}{" "}
+                              <span className="text-foreground/70">
+                                · FRW {frw(parseFloat(item.price.amount))}
+                              </span>{" "}
+                              / unit
                             </span>
                           </div>
                           <div className="mt-auto pt-2 flex items-center gap-2">
@@ -255,6 +268,9 @@ const MyList = () => {
                           <div className="text-right">
                             <div className="text-lg font-bold text-primary">
                               ${lineTotal.toFixed(2)}
+                            </div>
+                            <div className="text-[11px] font-semibold text-brand-green">
+                              FRW {frw(lineTotal)}
                             </div>
                             <div className="text-[11px] text-muted-foreground">
                               {item.quantity} × ${parseFloat(item.price.amount).toFixed(2)}
@@ -331,16 +347,28 @@ const MyList = () => {
                     <span className="font-medium">${subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs">
+                    <span className="text-muted-foreground">In Rwandan Francs</span>
+                    <span className="font-semibold text-brand-green">FRW {frw(subtotal)}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
                     <span className="text-muted-foreground">Shipping</span>
                     <span className="text-muted-foreground italic">Quoted by supplier</span>
                   </div>
                   <div className="border-t border-border pt-2 flex justify-between items-baseline">
                     <span className="font-semibold">Estimated total</span>
-                    <span className="text-2xl font-bold text-primary">
-                      ${subtotal.toFixed(2)}
-                    </span>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-primary leading-tight">
+                        ${subtotal.toFixed(2)}
+                      </div>
+                      <div className="text-xs font-semibold text-brand-green">
+                        ≈ FRW {frw(subtotal)}
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <p className="text-[10px] text-muted-foreground -mt-1">
+                  Indicative rate: 1 USD ≈ {USD_TO_FRW.toLocaleString()} FRW
+                </p>
 
                 <div className="space-y-2">
                   <Button
