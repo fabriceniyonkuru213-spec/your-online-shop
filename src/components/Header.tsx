@@ -102,18 +102,13 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Category nav */}
+      {/* Main nav */}
       <nav className="border-t border-border bg-secondary/40">
-        <div className="container-wide flex h-11 items-center gap-6 overflow-x-auto text-sm font-medium scrollbar-hide">
-          <a href="#shop" className="text-primary font-semibold whitespace-nowrap">All Categories</a>
-          <a href="#grains" className="hover:text-primary whitespace-nowrap">Grains & Beans</a>
-          <a href="#coffee" className="hover:text-primary whitespace-nowrap">Coffee & Tea</a>
-          <a href="#produce" className="hover:text-primary whitespace-nowrap">Fresh Produce</a>
-          <a href="#packaging" className="hover:text-primary whitespace-nowrap">Food Packaging</a>
-          <a href="#oils" className="hover:text-primary whitespace-nowrap">Oils & Honey</a>
-          <a href="#suppliers" className="hover:text-primary whitespace-nowrap">Verified Suppliers</a>
-          <Link to="/my-list" className="hover:text-primary whitespace-nowrap">My List / RFQ</Link>
-          <a href="#shipping" className="hover:text-primary whitespace-nowrap">Logistics</a>
+        <div className="container-wide flex h-11 items-center gap-8 overflow-x-auto text-sm font-semibold scrollbar-hide">
+          <Link to="/" className="text-primary whitespace-nowrap">Home</Link>
+          <a href="#about" className="hover:text-primary whitespace-nowrap">About Us</a>
+          <a href="#services" className="hover:text-primary whitespace-nowrap">Services</a>
+          <a href="#payment" className="hover:text-primary whitespace-nowrap">Payment Methods</a>
         </div>
       </nav>
     </header>
