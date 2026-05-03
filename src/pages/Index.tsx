@@ -273,110 +273,100 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Category sections — wired to nav anchors */}
-      {[
-        { id: "grains", title: "Grains & Beans", desc: "Maize, sorghum, beans and cassava — sourced from Rwandan cooperatives.", cats: ["Grains", "Flour"] },
-        { id: "coffee", title: "Coffee & Tea", desc: "Single-origin Arabica and highland black tea, ready to export.", cats: ["Coffee", "Tea"] },
-        { id: "produce", title: "Fresh Produce", desc: "Bananas, vegetables and seasonal fruit from Eastern Province farms.", cats: ["Produce"] },
-        { id: "packaging", title: "Food Packaging", desc: "Eco kraft boxes, vacuum bags and biodegradable bagasse containers.", cats: ["Packaging"] },
-        { id: "oils", title: "Oils & Honey", desc: "Pure cooking oils, palm oil and highland honey at wholesale prices.", cats: ["Oils", "Honey"] },
-      ].map((sec) => {
-        const items = staticProducts.filter((p) => sec.cats.includes(p.category));
-        if (items.length === 0) return null;
-        return (
-          <section key={sec.id} id={sec.id} className="py-10 border-t border-border">
-            <div className="container-wide">
-              <div className="flex items-end justify-between mb-5">
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Category</p>
-                  <h2 className="text-2xl md:text-3xl font-bold">{sec.title}</h2>
-                  <p className="text-sm text-muted-foreground mt-1 max-w-2xl">{sec.desc}</p>
-                </div>
-                <a href="#shop" className="text-sm text-primary font-semibold hover:underline hidden md:inline">View all →</a>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
-                {items.map((p) => (
-                  <StaticProductCard key={p.id} p={p} />
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })}
-
-      {/* Verified Suppliers */}
-      <section id="suppliers" className="py-12 bg-secondary/40 border-t border-border">
-        <div className="container-wide">
-          <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Trusted partners</p>
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">Verified Suppliers</h2>
-          <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
-            Every supplier on KigaliTrade is verified for business registration, quality and export readiness.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* About Us */}
+      <section id="about" className="py-14 border-t border-border">
+        <div className="container-wide grid lg:grid-cols-2 gap-10 items-start">
+          <div>
+            <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">About Us</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">About this site</h2>
+            <p className="text-sm text-muted-foreground mb-3">
+              KigaliTrade is Rwanda's B2B marketplace connecting local producers, cooperatives and manufacturers with buyers across East Africa and beyond. We make it easy to source food, packaging, electronics and office supplies at wholesale prices — directly from verified suppliers.
+            </p>
+            <p className="text-sm text-muted-foreground mb-3">
+              Our mission is to empower Rwandan businesses by giving them a trusted digital storefront, transparent pricing and access to international buyers. Every supplier on the platform is vetted for business registration, product quality and export readiness.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Whether you're a retailer in Kigali, a distributor in Nairobi or an importer overseas, KigaliTrade is your single window into the best of Rwanda's products.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-3">
             {[
-              { name: "Kigali Coffee Co.", region: "Kigali · Coffee", years: 12, rating: 4.9 },
-              { name: "Nyanza Tea Estates", region: "Southern Province · Tea", years: 18, rating: 4.8 },
-              { name: "Rwanda Grain Ltd", region: "Musanze · Grains", years: 9, rating: 4.7 },
-              { name: "Akagera Apiaries", region: "Eastern Province · Honey", years: 7, rating: 4.9 },
-              { name: "PackRwanda", region: "Kigali · Packaging", years: 6, rating: 4.6 },
-              { name: "Kigali Electronics", region: "Kigali · Electronics", years: 5, rating: 4.7 },
+              { k: "1,200+", v: "Verified suppliers" },
+              { k: "15,000+", v: "Products listed" },
+              { k: "30+", v: "Countries served" },
+              { k: "24/7", v: "Trade support" },
             ].map((s) => (
-              <div key={s.name} className="bg-card border border-border rounded-md p-4 hover:shadow-card-hover transition-shadow">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="h-10 w-10 rounded-md bg-brand-gradient flex items-center justify-center text-white font-bold">
-                    {s.name[0]}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold leading-tight">{s.name}</h3>
-                    <p className="text-xs text-muted-foreground">{s.region}</p>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1"><ShieldCheck className="h-3.5 w-3.5 text-brand-green" /> Verified · {s.years} yrs</span>
-                  <span className="font-semibold text-foreground">★ {s.rating}</span>
-                </div>
+              <div key={s.v} className="bg-card border border-border rounded-md p-5 text-center">
+                <div className="text-2xl font-extrabold text-primary">{s.k}</div>
+                <div className="text-xs text-muted-foreground mt-1">{s.v}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Logistics */}
-      <section id="shipping" className="py-12 border-t border-border">
-        <div className="container-wide grid lg:grid-cols-2 gap-8 items-start">
-          <div>
-            <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">Logistics</p>
-            <h2 className="text-2xl md:text-3xl font-bold mb-2">Shipping across Rwanda & EAC</h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              We partner with trusted logistics providers to deliver your bulk orders safely — from Kigali warehouses to your door, anywhere in East Africa and beyond.
-            </p>
-            <ul className="space-y-2 text-sm">
-              {[
-                "Door-to-door delivery within Kigali in 24h",
-                "EAC ground freight to Uganda, Kenya, Tanzania, Burundi, DRC",
-                "Air & sea freight via DHL and Bolloré for export orders",
-                "Real-time tracking and insurance available on all shipments",
-              ].map((t) => (
-                <li key={t} className="flex gap-2">
-                  <Truck className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-3">
+      {/* Services */}
+      <section id="services" className="py-14 bg-secondary/40 border-t border-border">
+        <div className="container-wide">
+          <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Services</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">What we do</h2>
+          <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
+            From sourcing to shipping, KigaliTrade handles every step of the B2B trade journey so you can focus on growing your business.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { title: "Kigali Local", time: "24h", price: "From $5" },
-              { title: "EAC Ground", time: "3–7 days", price: "From $40" },
-              { title: "Air Freight", time: "2–5 days", price: "Quote on request" },
-              { title: "Sea Freight", time: "20–35 days", price: "Bulk orders" },
+              { icon: Package, title: "Wholesale Sourcing", desc: "Browse thousands of products from verified Rwandan suppliers at competitive bulk prices." },
+              { icon: ShieldCheck, title: "Supplier Verification", desc: "Every supplier is checked for business registration, quality standards and export readiness." },
+              { icon: Headphones, title: "Quote Management", desc: "Submit one request and receive multiple supplier offers within 24 hours — negotiate easily." },
+              { icon: Truck, title: "Logistics & Shipping", desc: "Door-to-door delivery in Kigali, EAC ground freight, and international air & sea shipping." },
+              { icon: CreditCard, title: "Secure Payments", desc: "Pay safely by card, Mobile Money or bank transfer with full buyer protection." },
+              { icon: Zap, title: "Trade Support", desc: "24/7 customer support for buyers and suppliers — in English, Kinyarwanda and French." },
             ].map((s) => (
-              <div key={s.title} className="bg-card border border-border rounded-md p-4">
+              <div key={s.title} className="bg-card border border-border rounded-md p-5 hover:shadow-card-hover transition-shadow">
+                <s.icon className="h-7 w-7 text-primary mb-3" />
                 <h3 className="font-semibold mb-1">{s.title}</h3>
-                <p className="text-xs text-muted-foreground">Transit: {s.time}</p>
-                <p className="text-sm font-semibold text-primary mt-2">{s.price}</p>
+                <p className="text-sm text-muted-foreground">{s.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Payment Methods */}
+      <section id="payment" className="py-14 border-t border-border">
+        <div className="container-wide">
+          <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Payment Methods</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">All the ways you can pay</h2>
+          <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
+            Choose the payment method that works best for your business. All transactions are protected by our buyer guarantee.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { title: "Credit & Debit Cards", desc: "Visa, Mastercard, American Express and Discover accepted at secure checkout." },
+              { title: "MTN Mobile Money", desc: "Pay instantly from your MTN MoMo wallet — fast and convenient across Rwanda." },
+              { title: "Airtel Money", desc: "Use Airtel Money for quick mobile payments with no hidden fees." },
+              { title: "Bank Transfer", desc: "Direct wire transfer to our escrow account — recommended for large bulk orders." },
+              { title: "PayPal", desc: "International buyers can pay securely using their PayPal balance or linked card." },
+              { title: "Cash on Delivery", desc: "Available within Kigali for verified business accounts on orders under $500." },
+              { title: "Letter of Credit (L/C)", desc: "Bank-guaranteed payment for export orders above $10,000 — handled by our trade team." },
+              { title: "Cheque", desc: "Local Rwandan cheques accepted for registered businesses with prior approval." },
+              { title: "Crypto (USDT)", desc: "Stablecoin payments accepted for international orders — instant settlement." },
+            ].map((p) => (
+              <div key={p.title} className="bg-card border border-border rounded-md p-5">
+                <CreditCard className="h-6 w-6 text-primary mb-2" />
+                <h3 className="font-semibold mb-1">{p.title}</h3>
+                <p className="text-sm text-muted-foreground">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 bg-secondary/60 border border-border rounded-md p-5 flex items-start gap-3">
+            <ShieldCheck className="h-6 w-6 text-brand-green shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-semibold mb-1">100% Buyer Protection</h3>
+              <p className="text-sm text-muted-foreground">
+                Every payment is held securely until you confirm the order matches the listing. Full refund if anything goes wrong.
+              </p>
+            </div>
           </div>
         </div>
       </section>
