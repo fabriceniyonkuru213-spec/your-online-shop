@@ -12,9 +12,17 @@ import type { Session } from "@supabase/supabase-js";
 export const Header = () => {
   const [search, setSearch] = useState("");
   const [session, setSession] = useState<Session | null>(null);
+  const [activeSection, setActiveSection] = useState<string>("shop");
   const rfqCount = useRfqStore((s) => s.items.length);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const navItems = [
+    { id: "shop", label: "Home" },
+    { id: "about", label: "About Us" },
+    { id: "services", label: "Services" },
+    { id: "payment", label: "Payment Methods" },
+  ];
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
@@ -41,6 +49,26 @@ export const Header = () => {
       setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 50);
     }
   }, [location.pathname, location.hash]);
+
+  // Scroll spy: highlight nav link for the section currently in view
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+    const ids = navItems.map((n) => n.id);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActiveSection(visible[0].target.id);
+      },
+      { rootMargin: "-150px 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [location.pathname]);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -157,10 +185,24 @@ export const Header = () => {
       {/* Main nav */}
       <nav className="border-t border-border bg-secondary/40">
         <div className="container-wide flex h-11 items-center gap-8 overflow-x-auto text-sm font-semibold scrollbar-hide">
-          <a href="/#shop" onClick={(e) => goToAnchor(e, "shop")} className="text-primary whitespace-nowrap">Home</a>
-          <a href="/#about" onClick={(e) => goToAnchor(e, "about")} className="hover:text-primary whitespace-nowrap">About Us</a>
-          <a href="/#services" onClick={(e) => goToAnchor(e, "services")} className="hover:text-primary whitespace-nowrap">Services</a>
-          <a href="/#payment" onClick={(e) => goToAnchor(e, "payment")} className="hover:text-primary whitespace-nowrap">Payment Methods</a>
+          {navItems.map((item) => {
+            const isActive = location.pathname === "/" && activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={`/#${item.id}`}
+                onClick={(e) => goToAnchor(e, item.id)}
+                className={`relative whitespace-nowrap transition-colors py-2 ${
+                  isActive ? "text-primary" : "text-foreground hover:text-primary"
+                }`}
+              >
+                {item.label}
+                {isActive && (
+                  <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-primary rounded-full" />
+                )}
+              </a>
+            );
+          })}
         </div>
       </nav>
     </header>
