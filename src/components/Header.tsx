@@ -1,14 +1,61 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 import { useRfqStore } from "@/stores/rfqStore";
-import { Search, User, Globe, MessageSquare, Menu, ListChecks } from "lucide-react";
+import { Search, User, Globe, MessageSquare, Menu, ListChecks, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
+import type { Session } from "@supabase/supabase-js";
 
 export const Header = () => {
   const [search, setSearch] = useState("");
+  const [session, setSession] = useState<Session | null>(null);
   const rfqCount = useRfqStore((s) => s.items.length);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
+    supabase.auth.getSession().then(({ data: { session } }) => setSession(session));
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  // Smooth-scroll to anchors. If we're on a different page, navigate first.
+  const goToAnchor = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      return;
+    }
+    const el = document.getElementById(id);
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", `#${id}`);
+  };
+
+  // When landing on "/" with a hash, scroll to that section
+  useEffect(() => {
+    if (location.pathname === "/" && location.hash) {
+      const id = location.hash.slice(1);
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 50);
+    }
+  }, [location.pathname, location.hash]);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast({ title: "Signed out" });
+  };
+
+  const onSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      navigate("/#shop");
+      return;
+    }
+    document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <header className="sticky top-0 z-40 w-full bg-background border-b border-border shadow-sm">
       {/* Top utility bar */}
@@ -22,8 +69,16 @@ export const Header = () => {
           <div className="flex items-center gap-4">
             <a href="#sell" className="hover:text-brand-orange">Sell on KigaliTrade</a>
             <span className="opacity-70 hidden sm:inline">|</span>
-            <a href="#login" className="hover:text-brand-orange hidden sm:inline">Sign in</a>
-            <a href="#register" className="hover:text-brand-orange hidden sm:inline">Register</a>
+            {session ? (
+              <button onClick={handleSignOut} className="hover:text-brand-orange hidden sm:inline-flex items-center gap-1">
+                <LogOut className="h-3 w-3" /> Sign out
+              </button>
+            ) : (
+              <>
+                <Link to="/auth" className="hover:text-brand-orange hidden sm:inline">Sign in</Link>
+                <Link to="/auth" className="hover:text-brand-orange hidden sm:inline">Register</Link>
+              </>
+            )}
             <span className="flex items-center gap-1 opacity-80"><Globe className="h-3 w-3" /> EN / USD</span>
           </div>
         </div>
@@ -42,14 +97,7 @@ export const Header = () => {
         </Link>
 
         {/* Search bar */}
-        <form
-          className="flex-1 max-w-3xl"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const el = document.getElementById("shop");
-            el?.scrollIntoView({ behavior: "smooth" });
-          }}
-        >
+        <form className="flex-1 max-w-3xl" onSubmit={onSearchSubmit}>
           <div className="flex h-12 rounded-full border-2 border-primary overflow-hidden shadow-sm">
             <select className="hidden md:block bg-secondary px-4 text-sm border-r border-border outline-none">
               <option>All Categories</option>
@@ -57,11 +105,13 @@ export const Header = () => {
               <option>Coffee & Tea</option>
               <option>Packaging</option>
               <option>Fresh Produce</option>
+              <option>Electronics</option>
+              <option>Computers</option>
             </select>
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search beans, coffee, packaging..."
+              placeholder="Search here..."
               className="flex-1 px-4 text-sm outline-none bg-background"
             />
             <button type="submit" className="bg-primary hover:bg-brand-orange-dark text-primary-foreground px-6 flex items-center gap-2 transition-colors">
@@ -71,7 +121,7 @@ export const Header = () => {
           </div>
           <div className="hidden lg:flex items-center gap-3 mt-1.5 text-xs text-muted-foreground">
             <span className="font-medium">Popular:</span>
-            {["Coffee beans", "Red beans", "Kraft boxes", "Cassava flour", "Honey"].map((t) => (
+            {["Coffee beans", "Red beans", "Laptop", "Smartphone", "Honey"].map((t) => (
               <button key={t} type="button" onClick={() => setSearch(t)} className="hover:text-primary">{t}</button>
             ))}
           </div>
@@ -93,8 +143,10 @@ export const Header = () => {
           <Button variant="ghost" size="icon" className="hidden md:inline-flex">
             <MessageSquare className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" className="hidden md:inline-flex">
-            <User className="h-5 w-5" />
+          <Button asChild variant="ghost" size="icon" className="hidden md:inline-flex" title={session ? "Account" : "Sign in"}>
+            <Link to="/auth">
+              <User className="h-5 w-5" />
+            </Link>
           </Button>
           <Button variant="ghost" size="icon" className="md:hidden">
             <Menu className="h-5 w-5" />
@@ -105,10 +157,10 @@ export const Header = () => {
       {/* Main nav */}
       <nav className="border-t border-border bg-secondary/40">
         <div className="container-wide flex h-11 items-center gap-8 overflow-x-auto text-sm font-semibold scrollbar-hide">
-          <Link to="/" className="text-primary whitespace-nowrap">Home</Link>
-          <a href="#about" className="hover:text-primary whitespace-nowrap">About Us</a>
-          <a href="#services" className="hover:text-primary whitespace-nowrap">Services</a>
-          <a href="#payment" className="hover:text-primary whitespace-nowrap">Payment Methods</a>
+          <a href="/#shop" onClick={(e) => goToAnchor(e, "shop")} className="text-primary whitespace-nowrap">Home</a>
+          <a href="/#about" onClick={(e) => goToAnchor(e, "about")} className="hover:text-primary whitespace-nowrap">About Us</a>
+          <a href="/#services" onClick={(e) => goToAnchor(e, "services")} className="hover:text-primary whitespace-nowrap">Services</a>
+          <a href="/#payment" onClick={(e) => goToAnchor(e, "payment")} className="hover:text-primary whitespace-nowrap">Payment Methods</a>
         </div>
       </nav>
     </header>
