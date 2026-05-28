@@ -82,12 +82,12 @@ export const Header = () => {
       {/* Main header */}
       <div className="container-wide flex h-20 items-center gap-4">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <div className="h-10 w-10 rounded-md bg-brand-gradient flex items-center justify-center text-white font-extrabold text-lg">K</div>
+          <div className="h-10 w-10 rounded-md bg-brand-gradient flex items-center justify-center text-white font-extrabold text-lg">O</div>
           <div className="leading-tight hidden sm:block">
             <div className="font-extrabold text-xl tracking-tight">
-              Kigali<span className="text-primary">Trade</span>
+              Online<span className="text-primary">Market</span>
             </div>
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Rwanda B2B Marketplace</div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground">B2B Marketplace</div>
           </div>
         </Link>
 
