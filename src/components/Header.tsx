@@ -18,10 +18,10 @@ export const Header = () => {
   const location = useLocation();
 
   const navItems = [
-    { id: "shop", label: "Home" },
-    { id: "about", label: "About Us" },
-    { id: "services", label: "Services" },
-    { id: "payment", label: "Payment Methods" },
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About Us" },
+    { path: "/services", label: "Services" },
+    { path: "/payment-methods", label: "Payment Methods" },
   ];
 
   useEffect(() => {
@@ -30,45 +30,12 @@ export const Header = () => {
     return () => sub.subscription.unsubscribe();
   }, []);
 
-  // Smooth-scroll to anchors. If we're on a different page, navigate first.
-  const goToAnchor = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
-    if (location.pathname !== "/") {
-      navigate(`/#${id}`);
-      return;
-    }
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-    history.replaceState(null, "", `#${id}`);
-  };
-
-  // When landing on "/" with a hash, scroll to that section
-  useEffect(() => {
-    if (location.pathname === "/" && location.hash) {
-      const id = location.hash.slice(1);
-      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 50);
-    }
-  }, [location.pathname, location.hash]);
-
-  // Scroll spy: highlight nav link for the section currently in view
-  useEffect(() => {
+  // When on the home page, smooth-scroll to the shop section
+  const scrollToShop = (e: React.MouseEvent) => {
     if (location.pathname !== "/") return;
-    const ids = navItems.map((n) => n.id);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActiveSection(visible[0].target.id);
-      },
-      { rootMargin: "-150px 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, [location.pathname]);
+    e.preventDefault();
+    document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -78,7 +45,8 @@ export const Header = () => {
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (location.pathname !== "/") {
-      navigate("/#shop");
+      navigate("/");
+      setTimeout(() => document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" }), 100);
       return;
     }
     document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
