@@ -153,12 +153,12 @@ export const Header = () => {
       <nav className="border-t border-border bg-secondary/40">
         <div className="container-wide flex h-11 items-center gap-8 overflow-x-auto text-sm font-semibold scrollbar-hide">
           {navItems.map((item) => {
-            const isActive = location.pathname === "/" && activeSection === item.id;
+            const isActive = location.pathname === item.path;
             return (
-              <a
-                key={item.id}
-                href={`/#${item.id}`}
-                onClick={(e) => goToAnchor(e, item.id)}
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={item.path === "/" ? scrollToShop : undefined}
                 className={`relative whitespace-nowrap transition-colors py-2 ${
                   isActive ? "text-primary" : "text-foreground hover:text-primary"
                 }`}
@@ -167,7 +167,7 @@ export const Header = () => {
                 {isActive && (
                   <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-primary rounded-full" />
                 )}
-              </a>
+              </Link>
             );
           })}
         </div>
