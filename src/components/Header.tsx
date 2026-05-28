@@ -57,12 +57,12 @@ export const Header = () => {
       <div className="bg-brand-dark text-white text-xs">
         <div className="container-wide flex h-8 items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="hidden sm:inline">Deliver to: 🇷🇼 Rwanda</span>
+            <span className="hidden sm:inline">Deliver to: Worldwide</span>
             <span className="hidden md:inline opacity-70">|</span>
             <a href="#help" className="hidden md:inline hover:text-brand-orange">Help Center</a>
           </div>
           <div className="flex items-center gap-4">
-            <a href="#sell" className="hover:text-brand-orange">Sell on KigaliTrade</a>
+            <a href="#sell" className="hover:text-brand-orange">Sell on Online Market</a>
             <span className="opacity-70 hidden sm:inline">|</span>
             {session ? (
               <button onClick={handleSignOut} className="hover:text-brand-orange hidden sm:inline-flex items-center gap-1">
