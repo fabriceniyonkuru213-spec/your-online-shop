@@ -280,13 +280,14 @@ const Index = () => {
             <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">About Us</p>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">About this site</h2>
             <p className="text-sm text-muted-foreground mb-3">
-              KigaliTrade is Rwanda's B2B marketplace connecting local producers, cooperatives and manufacturers with buyers across East Africa and beyond. We make it easy to source food, packaging, electronics and office supplies at wholesale prices — directly from verified suppliers.
+              Online Market is a B2B marketplace connecting local producers, cooperatives and manufacturers with buyers across East Africa and beyond. We make it easy to source food, packaging, electronics and office supplies at wholesale prices — directly from verified suppliers.
             </p>
             <p className="text-sm text-muted-foreground mb-3">
-              Our mission is to empower Rwandan businesses by giving them a trusted digital storefront, transparent pricing and access to international buyers. Every supplier on the platform is vetted for business registration, product quality and export readiness.
+              Our mission is to empower businesses by giving them a trusted digital storefront, transparent pricing and access to international buyers. Every supplier on the platform is vetted for business registration, product quality and export readiness.
             </p>
             <p className="text-sm text-muted-foreground">
-              Whether you're a retailer in Kigali, a distributor in Nairobi or an importer overseas, KigaliTrade is your single window into the best of Rwanda's products.
+              Whether you're a retailer in the city, a distributor in a neighboring country or an importer overseas, Online Market is your single window into the best products available.
+            </p>
             </p>
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
