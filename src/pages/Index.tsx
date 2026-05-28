@@ -288,7 +288,7 @@ const Index = () => {
             <p className="text-sm text-muted-foreground">
               Whether you're a retailer in the city, a distributor in a neighboring country or an importer overseas, Online Market is your single window into the best products available.
             </p>
-            </p>
+            <a href="/about" className="inline-block mt-4 text-sm font-semibold text-primary hover:underline">View full page →</a>
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
