@@ -12,7 +12,6 @@ import type { Session } from "@supabase/supabase-js";
 export const Header = () => {
   const [search, setSearch] = useState("");
   const [session, setSession] = useState<Session | null>(null);
-  const [activeSection, setActiveSection] = useState<string>("shop");
   const rfqCount = useRfqStore((s) => s.items.length);
   const navigate = useNavigate();
   const location = useLocation();
