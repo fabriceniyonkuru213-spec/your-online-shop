@@ -312,8 +312,9 @@ const Index = () => {
           <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Services</p>
           <h2 className="text-2xl md:text-3xl font-bold mb-2">What we do</h2>
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
-            From sourcing to shipping, KigaliTrade handles every step of the B2B trade journey so you can focus on growing your business.
+            From sourcing to shipping, Online Market handles every step of the B2B trade journey so you can focus on growing your business.
           </p>
+          <a href="/services" className="inline-block mb-6 text-sm font-semibold text-primary hover:underline">View full page →</a>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { icon: Package, title: "Wholesale Sourcing", desc: "Browse thousands of products from verified Rwandan suppliers at competitive bulk prices." },
