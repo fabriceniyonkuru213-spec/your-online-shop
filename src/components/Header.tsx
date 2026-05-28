@@ -12,15 +12,17 @@ import type { Session } from "@supabase/supabase-js";
 export const Header = () => {
   const [search, setSearch] = useState("");
   const [session, setSession] = useState<Session | null>(null);
+  const [activeSection, setActiveSection] = useState<string>("");
+  const [mobileOpen, setMobileOpen] = useState(false);
   const rfqCount = useRfqStore((s) => s.items.length);
   const navigate = useNavigate();
   const location = useLocation();
 
   const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About Us" },
-    { path: "/services", label: "Services" },
-    { path: "/payment-methods", label: "Payment Methods" },
+    { path: "/", label: "Home", sectionId: "" },
+    { path: "/about", label: "About Us", sectionId: "about" },
+    { path: "/services", label: "Services", sectionId: "services" },
+    { path: "/payment-methods", label: "Payment Methods", sectionId: "payment" },
   ];
 
   useEffect(() => {
@@ -29,12 +31,67 @@ export const Header = () => {
     return () => sub.subscription.unsubscribe();
   }, []);
 
-  // When on the home page, smooth-scroll to the shop section
-  const scrollToShop = (e: React.MouseEvent) => {
-    if (location.pathname !== "/") return;
-    e.preventDefault();
-    document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+  /* Scroll spy: highlight sections on the home page */
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+
+    const sectionIds = ["about", "services", "payment"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      { rootMargin: "-60px 0px -60% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  /* Handle nav clicks */
+  const handleNavClick = (e: React.MouseEvent, item: typeof navItems[0]) => {
+    setMobileOpen(false);
+
+    if (item.path === "/") {
+      e.preventDefault();
+      if (location.pathname === "/") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/");
+      }
+      return;
+    }
+
+    if (location.pathname === "/" && item.sectionId) {
+      e.preventDefault();
+      const el = document.getElementById(item.sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
   };
+
+  /* On mount / route change, scroll to hash section on home page */
+  useEffect(() => {
+    if (location.pathname === "/" && location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 200);
+      }
+    }
+  }, [location.pathname, location.hash]);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -49,6 +106,16 @@ export const Header = () => {
       return;
     }
     document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const isActive = (item: typeof navItems[0]) => {
+    if (location.pathname !== "/") {
+      return location.pathname === item.path;
+    }
+    if (item.path === "/") {
+      return activeSection === "";
+    }
+    return activeSection === item.sectionId;
   };
 
   return (
@@ -143,7 +210,13 @@ export const Header = () => {
               <User className="h-5 w-5" />
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" className="md:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
             <Menu className="h-5 w-5" />
           </Button>
         </div>
@@ -153,18 +226,18 @@ export const Header = () => {
       <nav className="border-t border-border bg-secondary/40">
         <div className="container-wide flex h-11 items-center gap-8 overflow-x-auto text-sm font-semibold scrollbar-hide">
           {navItems.map((item) => {
-            const isActive = location.pathname === item.path;
+            const active = isActive(item);
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                onClick={item.path === "/" ? scrollToShop : undefined}
+                onClick={(e) => handleNavClick(e, item)}
                 className={`relative whitespace-nowrap transition-colors py-2 ${
-                  isActive ? "text-primary" : "text-foreground hover:text-primary"
+                  active ? "text-primary" : "text-foreground hover:text-primary"
                 }`}
               >
                 {item.label}
-                {isActive && (
+                {active && (
                   <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-primary rounded-full" />
                 )}
               </Link>
@@ -172,6 +245,29 @@ export const Header = () => {
           })}
         </div>
       </nav>
+
+      {/* Mobile nav overlay */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-border bg-background">
+          <div className="container-wide py-3 space-y-1">
+            {navItems.map((item) => {
+              const active = isActive(item);
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={(e) => handleNavClick(e, item)}
+                  className={`block py-2 px-3 rounded-md text-sm font-semibold ${
+                    active ? "bg-primary/10 text-primary" : "text-foreground hover:bg-secondary"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </header>
   );
 };

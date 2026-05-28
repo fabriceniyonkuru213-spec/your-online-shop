@@ -280,14 +280,15 @@ const Index = () => {
             <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">About Us</p>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">About this site</h2>
             <p className="text-sm text-muted-foreground mb-3">
-              KigaliTrade is Rwanda's B2B marketplace connecting local producers, cooperatives and manufacturers with buyers across East Africa and beyond. We make it easy to source food, packaging, electronics and office supplies at wholesale prices — directly from verified suppliers.
+              Online Market is a B2B marketplace connecting local producers, cooperatives and manufacturers with buyers across East Africa and beyond. We make it easy to source food, packaging, electronics and office supplies at wholesale prices — directly from verified suppliers.
             </p>
             <p className="text-sm text-muted-foreground mb-3">
-              Our mission is to empower Rwandan businesses by giving them a trusted digital storefront, transparent pricing and access to international buyers. Every supplier on the platform is vetted for business registration, product quality and export readiness.
+              Our mission is to empower businesses by giving them a trusted digital storefront, transparent pricing and access to international buyers. Every supplier on the platform is vetted for business registration, product quality and export readiness.
             </p>
             <p className="text-sm text-muted-foreground">
-              Whether you're a retailer in Kigali, a distributor in Nairobi or an importer overseas, KigaliTrade is your single window into the best of Rwanda's products.
+              Whether you're a retailer in the city, a distributor in a neighboring country or an importer overseas, Online Market is your single window into the best products available.
             </p>
+            <a href="/about" className="inline-block mt-4 text-sm font-semibold text-primary hover:underline">View full page →</a>
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
@@ -311,8 +312,9 @@ const Index = () => {
           <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Services</p>
           <h2 className="text-2xl md:text-3xl font-bold mb-2">What we do</h2>
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
-            From sourcing to shipping, KigaliTrade handles every step of the B2B trade journey so you can focus on growing your business.
+            From sourcing to shipping, Online Market handles every step of the B2B trade journey so you can focus on growing your business.
           </p>
+          <a href="/services" className="inline-block mb-6 text-sm font-semibold text-primary hover:underline">View full page →</a>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { icon: Package, title: "Wholesale Sourcing", desc: "Browse thousands of products from verified Rwandan suppliers at competitive bulk prices." },
@@ -340,6 +342,7 @@ const Index = () => {
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
             Choose the payment method that works best for your business. All transactions are protected by our buyer guarantee.
           </p>
+          <a href="/payment-methods" className="inline-block mb-6 text-sm font-semibold text-primary hover:underline">View full page →</a>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { title: "Credit & Debit Cards", desc: "Visa, Mastercard, American Express and Discover accepted at secure checkout." },
