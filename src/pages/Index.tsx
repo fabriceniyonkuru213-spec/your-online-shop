@@ -342,6 +342,7 @@ const Index = () => {
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
             Choose the payment method that works best for your business. All transactions are protected by our buyer guarantee.
           </p>
+          <a href="/payment-methods" className="inline-block mb-6 text-sm font-semibold text-primary hover:underline">View full page →</a>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { title: "Credit & Debit Cards", desc: "Visa, Mastercard, American Express and Discover accepted at secure checkout." },
