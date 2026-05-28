@@ -376,10 +376,10 @@ const Index = () => {
         <div className="container-wide py-12 grid md:grid-cols-4 gap-8 text-sm">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="h-9 w-9 rounded-md bg-brand-gradient flex items-center justify-center text-white font-extrabold">K</div>
-              <div className="font-extrabold text-lg">KigaliTrade</div>
+              <div className="h-9 w-9 rounded-md bg-brand-gradient flex items-center justify-center text-white font-extrabold">O</div>
+              <div className="font-extrabold text-lg">Online Market</div>
             </div>
-            <p className="text-white/70">Rwanda's B2B marketplace for food and packaging — connecting traders to verified suppliers.</p>
+            <p className="text-white/70">A trusted B2B marketplace connecting buyers to verified suppliers.</p>
           </div>
           <div>
             <h4 className="font-bold mb-3">For Buyers</h4>
@@ -393,7 +393,7 @@ const Index = () => {
           <div>
             <h4 className="font-bold mb-3">For Suppliers</h4>
             <ul className="space-y-1.5 text-white/70">
-              <li><a href="#sell" className="hover:text-brand-yellow">Sell on KigaliTrade</a></li>
+              <li><a href="#sell" className="hover:text-brand-yellow">Sell on Online Market</a></li>
               <li><a href="#" className="hover:text-brand-yellow">Verification process</a></li>
               <li><a href="#" className="hover:text-brand-yellow">Supplier dashboard</a></li>
             </ul>
@@ -409,8 +409,7 @@ const Index = () => {
         </div>
         <div className="border-t border-white/10">
           <div className="container-wide py-4 text-xs text-white/50 flex flex-wrap items-center justify-between gap-2">
-            <span>© {new Date().getFullYear()} KigaliTrade. All rights reserved.</span>
-            <span>Made in Rwanda 🇷🇼</span>
+            <span>© {new Date().getFullYear()} Online Market. All rights reserved.</span>
           </div>
         </div>
       </footer>

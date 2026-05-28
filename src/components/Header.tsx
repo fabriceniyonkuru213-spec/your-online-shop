@@ -12,16 +12,15 @@ import type { Session } from "@supabase/supabase-js";
 export const Header = () => {
   const [search, setSearch] = useState("");
   const [session, setSession] = useState<Session | null>(null);
-  const [activeSection, setActiveSection] = useState<string>("shop");
   const rfqCount = useRfqStore((s) => s.items.length);
   const navigate = useNavigate();
   const location = useLocation();
 
   const navItems = [
-    { id: "shop", label: "Home" },
-    { id: "about", label: "About Us" },
-    { id: "services", label: "Services" },
-    { id: "payment", label: "Payment Methods" },
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About Us" },
+    { path: "/services", label: "Services" },
+    { path: "/payment-methods", label: "Payment Methods" },
   ];
 
   useEffect(() => {
@@ -30,45 +29,12 @@ export const Header = () => {
     return () => sub.subscription.unsubscribe();
   }, []);
 
-  // Smooth-scroll to anchors. If we're on a different page, navigate first.
-  const goToAnchor = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
-    if (location.pathname !== "/") {
-      navigate(`/#${id}`);
-      return;
-    }
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-    history.replaceState(null, "", `#${id}`);
-  };
-
-  // When landing on "/" with a hash, scroll to that section
-  useEffect(() => {
-    if (location.pathname === "/" && location.hash) {
-      const id = location.hash.slice(1);
-      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 50);
-    }
-  }, [location.pathname, location.hash]);
-
-  // Scroll spy: highlight nav link for the section currently in view
-  useEffect(() => {
+  // When on the home page, smooth-scroll to the shop section
+  const scrollToShop = (e: React.MouseEvent) => {
     if (location.pathname !== "/") return;
-    const ids = navItems.map((n) => n.id);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActiveSection(visible[0].target.id);
-      },
-      { rootMargin: "-150px 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, [location.pathname]);
+    e.preventDefault();
+    document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -78,7 +44,8 @@ export const Header = () => {
   const onSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (location.pathname !== "/") {
-      navigate("/#shop");
+      navigate("/");
+      setTimeout(() => document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" }), 100);
       return;
     }
     document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
@@ -90,12 +57,12 @@ export const Header = () => {
       <div className="bg-brand-dark text-white text-xs">
         <div className="container-wide flex h-8 items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="hidden sm:inline">Deliver to: 🇷🇼 Rwanda</span>
+            <span className="hidden sm:inline">Deliver to: Worldwide</span>
             <span className="hidden md:inline opacity-70">|</span>
             <a href="#help" className="hidden md:inline hover:text-brand-orange">Help Center</a>
           </div>
           <div className="flex items-center gap-4">
-            <a href="#sell" className="hover:text-brand-orange">Sell on KigaliTrade</a>
+            <a href="#sell" className="hover:text-brand-orange">Sell on Online Market</a>
             <span className="opacity-70 hidden sm:inline">|</span>
             {session ? (
               <button onClick={handleSignOut} className="hover:text-brand-orange hidden sm:inline-flex items-center gap-1">
@@ -115,12 +82,12 @@ export const Header = () => {
       {/* Main header */}
       <div className="container-wide flex h-20 items-center gap-4">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <div className="h-10 w-10 rounded-md bg-brand-gradient flex items-center justify-center text-white font-extrabold text-lg">K</div>
+          <div className="h-10 w-10 rounded-md bg-brand-gradient flex items-center justify-center text-white font-extrabold text-lg">O</div>
           <div className="leading-tight hidden sm:block">
             <div className="font-extrabold text-xl tracking-tight">
-              Kigali<span className="text-primary">Trade</span>
+              Online<span className="text-primary">Market</span>
             </div>
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Rwanda B2B Marketplace</div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground">B2B Marketplace</div>
           </div>
         </Link>
 
@@ -186,12 +153,12 @@ export const Header = () => {
       <nav className="border-t border-border bg-secondary/40">
         <div className="container-wide flex h-11 items-center gap-8 overflow-x-auto text-sm font-semibold scrollbar-hide">
           {navItems.map((item) => {
-            const isActive = location.pathname === "/" && activeSection === item.id;
+            const isActive = location.pathname === item.path;
             return (
-              <a
-                key={item.id}
-                href={`/#${item.id}`}
-                onClick={(e) => goToAnchor(e, item.id)}
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={item.path === "/" ? scrollToShop : undefined}
                 className={`relative whitespace-nowrap transition-colors py-2 ${
                   isActive ? "text-primary" : "text-foreground hover:text-primary"
                 }`}
@@ -200,7 +167,7 @@ export const Header = () => {
                 {isActive && (
                   <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-primary rounded-full" />
                 )}
-              </a>
+              </Link>
             );
           })}
         </div>
