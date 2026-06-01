@@ -10,6 +10,7 @@ import Auth from "./pages/Auth.tsx";
 import About from "./pages/About.tsx";
 import Services from "./pages/Services.tsx";
 import PaymentMethods from "./pages/PaymentMethods.tsx";
+import GrowClub from "./pages/GrowClub.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { useCartSync } from "@/hooks/useCartSync";
 
@@ -23,6 +24,7 @@ const AppContent = () => {
       <Route path="/about" element={<About />} />
       <Route path="/services" element={<Services />} />
       <Route path="/payment-methods" element={<PaymentMethods />} />
+      <Route path="/grow-club" element={<GrowClub />} />
       <Route path="/product/:handle" element={<ProductDetail />} />
       <Route path="/my-list" element={<MyList />} />
       <Route path="/auth" element={<Auth />} />

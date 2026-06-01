@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      grow_club_signups: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          tier: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id?: string
+          tier: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          tier?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           company: string | null
